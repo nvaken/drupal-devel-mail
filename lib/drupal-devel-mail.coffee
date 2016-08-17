@@ -12,18 +12,34 @@ module.exports = DrupalDevelMail =
     # @drupalDevelMailView.getCloseBtnElement()
     #   .onclick = @hidePanel.bind this
 
+    # The Directory instance, which we'll use to observe the devel-mails folder
     @directory = new Directory '/tmp/devel-mails';
-    @directory.onDidChange @updatePanel.bind(this)
 
+    # Watch the folder for changes
+    @directory.onDidChange @checkoutChangesDevelMail.bind(this)
+
+    # Register commands
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.commands.add 'atom-workspace', 'drupal-devel-mail:reload-mail': => @updatePanel()
     @subscriptions.add atom.commands.add 'atom-workspace', 'drupal-devel-mail:hide-panel': => @hidePanel()
     @subscriptions.add atom.commands.add 'atom-workspace', 'drupal-devel-mail:show-panel': => @showPanel()
     @subscriptions.add atom.commands.add 'atom-workspace', 'drupal-devel-mail:toggle-panel': => @togglePanel()
 
+    # Add the panel
     @modalPanel = atom.workspace.addRightPanel(item: @drupalDevelMailView.getElement(), visible: false)
 
     @updatePanel()
+
+  checkoutChangesDevelMail: () ->
+    atom.notifications.addInfo \
+      'New contents in the /tmp/devel-mails folder',
+        {
+          'detail': 'Usually means new e-mail.',
+          'icon': 'mail'
+        }
+
+    @updatePanel()
+    @showPanel()
 
   updatePanel: ->
 
