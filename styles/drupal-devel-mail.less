@@ -5,10 +5,14 @@
 @import "ui-variables";
 
 .drupal-devel-mail {
+  max-height: 200px;
   overflow-y: auto;
 
-  .inset-panel {
-    overflow-x: auto;
-    width: 300px;
+  table tr {
+    cursor: pointer;
+
+    &:hover {
+      background-color: @background-color-selected;
+    }
   }
 }
