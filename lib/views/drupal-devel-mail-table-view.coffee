@@ -38,7 +38,23 @@ class DrupalDevelMailTableView
     );
     @data = data
 
+  setColumnHeaders: (data) ->
+    @columnHeaderData = data
+
+  createColumnHeaders: ->
+    row = @createRow()
+    data = @columnHeaderData
+    for header in data
+      column = @createColumn(true)
+      column.innerHTML = header
+      row.appendChild column
+    row
+
   update: ->
+
+    # Set table headers
+    @tableBodyElement.appendChild @createColumnHeaders()
+
     i = 0
     data = @data
     for dataRow in data
@@ -59,8 +75,11 @@ class DrupalDevelMailTableView
   createRow: () ->
     document.createElement('tr')
 
-  createColumn: () ->
-    document.createElement('td')
+  createColumn: (header = false) ->
+    if (header == false)
+      document.createElement('td')
+    else
+      document.createElement('th')
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->

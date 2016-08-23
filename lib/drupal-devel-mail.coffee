@@ -11,6 +11,12 @@ fs = require('fs')
 module.exports = DrupalDevelMail =
   activate: (state) ->
     @drupalDevelMailView = new DrupalDevelMailTableView(state.drupalDevelMailViewState)
+    @drupalDevelMailView.setColumnHeaders([
+      'Creation date',
+      'From',
+      'To',
+      'Subject'
+    ]);
 
     # The Directory instance, which we'll use to observe the devel-mails folder
     @directory = new Directory '/tmp/devel-mails';
