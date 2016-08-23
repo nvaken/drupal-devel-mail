@@ -5,8 +5,11 @@
   "description": "A short description of your package",
   "keywords": [],
   "activationCommands": {},
-  "repository": "https://github.com/atom/drupal-devel-mail",
+  "repository": "https://github.com/nvaken/drupal-devel-mail",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nvaken/drupal-devel-mail/issues"
+  },
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },

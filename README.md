@@ -4,7 +4,7 @@
 
 # Todo
 
+- Cleaning: Clean up excessive code and more commenting
 - Open / close buttons in UI
 - Resize panel
 - Read / unread icons
-- Table with columns and info about the mails

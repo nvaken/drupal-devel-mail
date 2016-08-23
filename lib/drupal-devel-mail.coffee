@@ -14,9 +14,12 @@ module.exports = DrupalDevelMail =
 
     # The Directory instance, which we'll use to observe the devel-mails folder
     @directory = new Directory '/tmp/devel-mails';
+    @directory.create(0o775).then ((result) ->
 
-    # Watch the folder for changes
-    @directory.onDidChange @checkoutChangesDevelMail.bind(this)
+      # Watch the folder for changes
+      @directory.onDidChange @checkoutChangesDevelMail.bind(this)
+    ).bind this
+
 
     # Register commands
     @subscriptions = new CompositeDisposable
